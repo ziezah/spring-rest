@@ -6,8 +6,8 @@
 package hello;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -29,7 +29,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Azizah
+ * @author Rina
  */
 @Entity
 @Table(name = "language")
@@ -58,9 +58,9 @@ public class Language implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date lastUpdate;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "languageId", fetch = FetchType.LAZY)
-    private Collection<Film> filmCollection;
+    private transient List<Film> filmList;
     @OneToMany(mappedBy = "originalLanguageId", fetch = FetchType.LAZY)
-    private Collection<Film> filmCollection1;
+    private transient List<Film> filmList1;
 
     public Language() {
     }
@@ -100,21 +100,21 @@ public class Language implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Film> getFilmCollection() {
-        return filmCollection;
+    public List<Film> getFilmList() {
+        return filmList;
     }
 
-    public void setFilmCollection(Collection<Film> filmCollection) {
-        this.filmCollection = filmCollection;
+    public void setFilmList(List<Film> filmList) {
+        this.filmList = filmList;
     }
 
     @XmlTransient
-    public Collection<Film> getFilmCollection1() {
-        return filmCollection1;
+    public List<Film> getFilmList1() {
+        return filmList1;
     }
 
-    public void setFilmCollection1(Collection<Film> filmCollection1) {
-        this.filmCollection1 = filmCollection1;
+    public void setFilmList1(List<Film> filmList1) {
+        this.filmList1 = filmList1;
     }
 
     @Override

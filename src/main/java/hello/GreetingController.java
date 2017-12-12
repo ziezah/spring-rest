@@ -9,6 +9,8 @@ import java.util.stream.Collectors;
 import javax.persistence.EntityManagerFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,6 +28,7 @@ public class GreetingController {
     private EntityManagerFactory em;
     
 
+    @CrossOrigin(origins={"*"})
     @RequestMapping("/actors")
     public List<Actor> allActors (){
     	return em.createEntityManager()
@@ -33,6 +36,7 @@ public class GreetingController {
     			.getResultList();
     }
     
+    @CrossOrigin(origins={"*"})
     @RequestMapping("/films")
     public List<Film> allFilms (){
     	return em.createEntityManager()
@@ -45,4 +49,9 @@ public class GreetingController {
         return x;
 
     	}
+    
+    @Bean("abc")
+    public Greeting sample() {
+    	return new Greeting(18,"BPKP");
+    }
 }
